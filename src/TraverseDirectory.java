@@ -11,16 +11,17 @@ public class TraverseDirectory {
      * @return 하위 디렉토리, 파일의 목록
      * 
      * @author zeonghun
-     * @since 2023.03.17
+     * @since 2023.03.20
      */
     public List<String> scanDir(String path, List<String> fileList) {
-        File[] files = new File(path).listFiles(); // path 경로 하위에 있는 파일, 디렉토리를 배열로 생성
-        for (int i = 0; i < files.length; i++) {
-            if (files[i].isDirectory()) { // 디렉토리면 다시 메소드 호출
-                scanDir(files[i].getPath(), fileList);
-            } else { // 파일이면 fileList에 경로 추가
-                fileList.add(files[i].getPath());
-            }
+        // path 경로 하위에 있는 파일, 디렉토리를 배열로 생성
+        File[] files = new File(path).listFiles();
+        for (File file : files) {
+            // fileList에 경로 추가
+            fileList.add(file.getPath());
+            // 디렉토리면 다시 메소드 호출
+            if (file.isDirectory())
+                scanDir(file.getPath(), fileList);
         }
         return fileList;
     }
