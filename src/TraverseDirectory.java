@@ -16,6 +16,9 @@ public class TraverseDirectory {
     public List<String> scanDir(String path, List<String> fileList) {
         // path 경로 하위에 있는 파일, 디렉토리를 배열로 생성
         File[] files = new File(path).listFiles();
+        if ( files.length==0){
+            System.out.println("빈 디렉토리 입니다");
+        }
         for (File file : files) {
             // fileList에 경로 추가
             fileList.add(file.getPath());
