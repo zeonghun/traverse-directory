@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,7 +7,7 @@ public class Main {
      * (non-javadoc)
      * 
      * @author zeonghun
-     * @since 2023.03.20
+     * @since 2023.03.21
      */
     public static void main(String[] args) {
         List<String> list = new ArrayList<String>();
@@ -16,9 +17,9 @@ public class Main {
             for (int i = 0; i < fileList.size(); i++) {
                 System.out.println(fileList.get(i));
             }
-            // path가 없는 경로일 때
-        } catch (NullPointerException e) {
-            System.out.println("없는 경로입니다");
+            // path가 잘못된 경로일 때
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
         }
     }
 }

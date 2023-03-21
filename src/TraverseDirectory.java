@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class TraverseDirectory {
@@ -11,18 +12,22 @@ public class TraverseDirectory {
      * @return 하위 디렉토리, 파일의 목록
      * 
      * @author zeonghun
-     * @since 2023.03.20
+     * @since 2023.03.21
      */
-    public List<String> scanDir(String path, List<String> fileList) {
+    public List<String> scanDir(String path, List<String> fileList) throws FileNotFoundException {
         // path 경로 하위에 있는 파일, 디렉토리를 배열로 생성
         File[] files = new File(path).listFiles();
-        for (File file : files) {
-            // fileList에 경로 추가
-            fileList.add(file.getPath());
-            // 디렉토리면 다시 메소드 호출
-            if (file.isDirectory())
-                scanDir(file.getPath(), fileList);
+        if (files == null) {
+            throw new FileNotFoundException("잘못된 경로입니다");
+        } else {
+            for (File file : files) {
+                // fileList에 경로 추가
+                fileList.add(file.getPath());
+                // 디렉토리면 다시 메소드 호출
+                if (file.isDirectory())
+                    scanDir(file.getPath(), fileList);
+            }
+            return fileList;
         }
-        return fileList;
     }
 }
