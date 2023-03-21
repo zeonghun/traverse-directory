@@ -16,10 +16,12 @@ public class TraverseDirectory {
      */
     public List<String> scanDir(String path, List<String> fileList) throws FileNotFoundException {
         // path 경로 하위에 있는 파일, 디렉토리를 배열로 생성
-        File[] files = new File(path).listFiles();
-        if (files == null) {
+        File directory = new File(path);
+        
+        if (!directory.exists() || !directory.isDirectory()) {
             throw new FileNotFoundException("잘못된 경로입니다");
         } else {
+            File[] files = directory.listFiles();
             for (File file : files) {
                 // fileList에 경로 추가
                 fileList.add(file.getPath());
